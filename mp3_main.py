@@ -8,15 +8,17 @@ def download(video_url):
     temp_dir = tempfile.mkdtemp()
 
     ydl_opts = {
-        'format': 'bestaudio/best',
-        'outtmpl': f'{temp_dir}/%(title)s.%(ext)s',
-        'postprocessors': [{
-            'key': 'FFmpegExtractAudio',
-            'preferredcodec': 'mp3',
-            'preferredquality': '192',
-        }],
-        'quiet': True,
-    }
+    'format': 'bestaudio/best',
+    'outtmpl': f'{temp_dir}/%(title)s.%(ext)s',
+    'postprocessors': [{
+        'key': 'FFmpegExtractAudio',
+        'preferredcodec': 'mp3',
+        'preferredquality': '192',
+    }],
+    'quiet': True,
+    'extractor_args': {
+        'youtube': {
+            'player_client': ['android']}}}
     with ytd.YoutubeDL(ydl_opts) as ydl:
         info = ydl.extract_info(video_url, download=True)
         filename = ydl.prepare_filename(info)
