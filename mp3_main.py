@@ -16,9 +16,7 @@ def download(video_url):
         'preferredquality': '192',
     }],
     'quiet': True,
-    'extractor_args': {
-        'youtube': {
-            'player_client': ['android']}}}
+    'extractor_args': 'youtube:po_token=android.gvs+XXX'}
     with ytd.YoutubeDL(ydl_opts) as ydl:
         info = ydl.extract_info(video_url, download=True)
         filename = ydl.prepare_filename(info)
